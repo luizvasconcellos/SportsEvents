@@ -1,12 +1,10 @@
 //
 //  Sports.swift
-//  SportsEvents
 //
 //  Created by Luiz Vasconcellos on 11/10/24.
 //
 
 import Foundation
-
 
 // MARK: - Sport
 struct Sport: Codable, Sendable {
@@ -36,4 +34,4 @@ enum SportId: String, Codable, Sendable {
     case voll = "VOLL"
 }
 
-typealias Soports = [Sport]
+typealias Sports = [Sport]

@@ -43,7 +43,7 @@ struct NetworkRequest: NetworkRequestProtocol {
          method: HTTPMethodType = .get,
          headers: [String: String] = [:],
          queryParameters: [String: String] = [:],
-         bodyParameters: Data?) {
+         bodyParameters: Data? = nil) {
         self.baseURL = baseURL
         self.method = method
         self.headers = NetworkRequest.addHeaders(headers)

@@ -16,6 +16,7 @@ struct Event: Codable, Sendable {
     var eventStartTime: Date {
         Date(timeIntervalSince1970: TimeInterval(eventStartTimeUnix))
     }
+    var isFavorite: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case eventId = "i"

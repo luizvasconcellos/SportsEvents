@@ -17,7 +17,7 @@ private struct EndPoint {
 
 final class EventsAPIService {
     private let networkManager: NetworkManagerProtocol
-    private static let baseUrl = "https://ios-kaizen.github.io/"
+    private let baseUrl = "https://ios-kaizen.github.io/"
     
     init(networkManager: NetworkManagerProtocol) {
         self.networkManager = networkManager
@@ -26,8 +26,10 @@ final class EventsAPIService {
 
 extension EventsAPIService: EventsAPIServiceProtocol {
     
+    /// Fetch all Sports Events
+    /// - Returns: the result with object and custom error <Sports and NetworkAPIError>
     func fetchSportsEvents() async -> Result<Sports, NetworkAPIError> {
-        guard let url = URL(string: EventsAPIService.baseUrl + EndPoint.mockSports) else { return .failure(.invalidUrl) }
+        guard let url = URL(string: baseUrl + EndPoint.mockSports) else { return .failure(.invalidUrl) }
         
         do {
             let request = NetworkRequest(baseURL: url)
@@ -38,11 +40,15 @@ extension EventsAPIService: EventsAPIServiceProtocol {
             case .success(let sports):
                 return .success(sports)
             case .failure(let error):
+                #if DEBUG
                 print("DEBUG:: NetworkAPIError fetchSportsEvents error: \(error.localizedDescription)")
+                #endif
                 return .failure(error)
             }
         } catch {
+            #if DEBUG
             print("DEBUG:: NetworkAPIError fetchSportsEvents generic error: \(error.localizedDescription)")
+            #endif
             return .failure(.unknownError(error: error))
         }
     }

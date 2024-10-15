@@ -7,9 +7,11 @@
 import Foundation
 
 // MARK: - Sport
+typealias Sports = [Sport]
+
 struct Sport: Codable, Sendable {
     let sportName: String
-    let activeEvents: [Event]
+    var activeEvents: [Event]
     let sportId: SportId
     
     enum CodingKeys: String, CodingKey {
@@ -32,6 +34,19 @@ enum SportId: String, Codable, Sendable {
     case tabl = "TABL"
     case tenn = "TENN"
     case voll = "VOLL"
+    
+    var emoji: String {
+        switch self {
+        case .bask: return "🏀"
+        case .dart: return "🎯"
+        case .esps: return "🏊‍♂️"
+        case .foot, .futs: return "⚽️"
+        case .hand: return "🤾‍♂️"
+        case .iceh: return "🏒"
+        case .snoo: return "🎱"
+        case .tabl: return "🏓"
+        case .tenn: return "🎾"
+        case .voll: return "🏐"
+        }
+    }
 }
-
-typealias Sports = [Sport]

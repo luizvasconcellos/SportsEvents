@@ -61,17 +61,21 @@ extension HomeViewController {
         viewModel?.$favoriteActionMessagePublished
             .receive(on: DispatchQueue.main)
             .sink { message in
-                ToastMessage.show(message: message,
-                                  position: .bottom)
+                if !message.isEmpty {
+                    ToastMessage.show(message: message,
+                                      position: .bottom)
+                }
             }
             .store(in: &cancellables)
         
         viewModel?.$fetchErrorPublished
             .receive(on: DispatchQueue.main)
             .sink { message in
-                ToastMessage.show(message: message,
-                                  position: .bottom,
-                                  type: .error)
+                if !message.isEmpty {
+                    ToastMessage.show(message: message,
+                                      position: .bottom,
+                                      type: .error)
+                }
             }
             .store(in: &cancellables)
     }
